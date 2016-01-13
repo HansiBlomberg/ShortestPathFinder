@@ -90,5 +90,15 @@ namespace NodeTransportationLimited.Graphs.ShortestPathFinder.Testing
 				newLine
 			);
 		}
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <exclude/>
+        [TestMethod]
+        public void TestRun()
+        {
+            System.Console.WriteLine();
+        }
 	}
 }
