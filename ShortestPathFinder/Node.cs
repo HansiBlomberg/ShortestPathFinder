@@ -18,8 +18,26 @@ namespace NodeTransportationLimited.Graphs
     {
         public int ID { get; set; }
         public List<int> NeighborIDs { get; set; }
-       
+        public bool isVisited;
+
+
+       /// <summary>
+       /// Constructor - will create a new Node with one neighbour Node ID
+       /// 
+       /// </summary>
+       /// <param name="id"></param>
+       /// <param name="neighbourID"></param>
+        public Node(int id, int neighbourID)
+        {
+            this.ID = id;
+            this.NeighborIDs = new List<int>();
+            NeighborIDs.Add(neighbourID);
+            this.isVisited = false;
+        }
+
     }
+
+
 
 
 }
