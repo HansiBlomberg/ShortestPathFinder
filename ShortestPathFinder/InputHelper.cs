@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace NodeTransportationLimited.Graphs
 {
+    /// <summary>
+    /// Some helper methods for the Get Shortest Path application
+    /// </summary>
     public static class InputHelper
     {
 
