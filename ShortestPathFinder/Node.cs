@@ -17,7 +17,9 @@ namespace NodeTransportationLimited.Graphs
     class Node
     {
         public int ID { get; set; }
-        public int firstNeighborID { get; set; }
-        public int secondNeighborID { get; set; }
+        public List<int> NeighborIDs { get; set; }
+       
     }
+
+
 }
