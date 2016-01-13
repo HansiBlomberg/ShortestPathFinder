@@ -90,15 +90,17 @@ namespace NodeTransportationLimited.Graphs
             // Create new is not exists
             if (nodes.Where(n => n.ID == nodeID).Count() == 0)
             {
-                node = new Node();
+                node = new Node(nodeID, neighbourID);
                 node.ID = nodeID;
                 node.NeighborIDs = new List<int>();
                 nodes.Add(node);
             }
+            else {
 
-            // add neighbour
-            node = nodes.Where(n => n.ID == nodeID).Single();
-            node.NeighborIDs.Add(neighbourID);
+                // add neighbour to existing node
+                node = nodes.Where(n => n.ID == nodeID).Single();
+                node.NeighborIDs.Add(neighbourID);
+            }
 
         }
 
