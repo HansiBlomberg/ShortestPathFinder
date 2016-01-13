@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace NodeTransportationLimited.Graphs
 {
-    class InputHelper
+    static class InputHelper
     {
 
         /// <summary>
@@ -15,7 +15,7 @@ namespace NodeTransportationLimited.Graphs
         /// </summary>
         /// <param name="numberOfNodes"></param>
         /// <returns>True if the number of nodes is acceptable</returns>
-        public bool isNumberOfNodesValid(int numberOfNodes)
+        public static bool isNumberOfNodesValid(int numberOfNodes)
         {
             if (numberOfNodes < 1 || numberOfNodes > 512) return false;
             return true;
@@ -27,7 +27,7 @@ namespace NodeTransportationLimited.Graphs
         /// </summary>
         /// <param name="valuePairs"></param>
         /// <returns>A collection of Node or NULL if bad input data</returns>
-        public List<Node> parseValuePairs(string valuePairs)
+        public static List<Node> parseValuePairs(string valuePairs)
         {
             var nodes = new List<Node>();
             
@@ -83,7 +83,7 @@ namespace NodeTransportationLimited.Graphs
 
         }
 
-        private void CreateOrUpdateNode(List<Node> nodes, int nodeID, int neighbourID) {
+        private static void CreateOrUpdateNode(List<Node> nodes, int nodeID, int neighbourID) {
 
             Node node;
 
