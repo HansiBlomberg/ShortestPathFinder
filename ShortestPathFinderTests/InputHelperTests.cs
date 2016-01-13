@@ -1,0 +1,47 @@
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NodeTransportationLimited.Graphs;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+
+namespace NodeTransportationLimited.Graphs.Tests
+{
+    /// <summary>
+    /// 
+    /// </summary>
+    [TestClass()]
+    public class InputHelperTests
+    {
+        /// <summary>
+        /// Tests the isNumberOfNodesValid method
+        /// </summary>
+        [TestMethod()]
+        public void isNumberOfNodesValidTest()
+        {
+
+            Assert.IsTrue(InputHelper.isNumberOfNodesValid(10));
+            Assert.IsFalse(InputHelper.isNumberOfNodesValid(0));
+            Assert.IsFalse(InputHelper.isNumberOfNodesValid(-1));
+            Assert.IsFalse(InputHelper.isNumberOfNodesValid(513));
+        }
+
+        /// <summary>
+        /// Tests the parseValuePairs method
+        /// </summary>
+        [TestMethod()]
+        public void parseValuePairsTest()
+        {
+            
+            Assert.IsTrue(InputHelper.parseValuePairs("").Count() == 0, "Empty string test failed!");
+            Assert.IsTrue(InputHelper.parseValuePairs("0 1, 1 2, 2 3, 3 4").Count() == 5, "Count nodes = 5 failed!");
+            Assert.IsTrue(InputHelper.parseValuePairs("0 1, 1 2, 2 3, 3 4").Where(vp => vp.NeighborIDs.Contains(1)).Count() == 2, "Find 2 occurences of 1 as neighbour failedS!");
+
+
+
+
+        }
+    }
+}

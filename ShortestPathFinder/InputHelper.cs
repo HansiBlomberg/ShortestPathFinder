@@ -52,7 +52,7 @@ namespace NodeTransportationLimited.Graphs
             foreach (var pair in allThePairs)
             {
                 // Separate the values for each valuepair
-                var splitPairs = pair.Split(' ');
+                var splitPairs = pair.Trim().Split(' ');
 
                 // Do some sanity checking before creating
                 // and adding a Node object to the nodes collection
@@ -64,7 +64,7 @@ namespace NodeTransportationLimited.Graphs
 
                     // Now, make sure we have valid values in the pair
                     int value1, value2;
-                    if ( int.TryParse(splitPairs[0], out value1) && int.TryParse(splitPairs[2], out value2) )
+                    if ( int.TryParse(splitPairs[0], out value1) && int.TryParse(splitPairs[1], out value2) )
                     {
                         // If we are here, both value1 and value2 are good integers
                         // that we can validate further
@@ -95,7 +95,6 @@ namespace NodeTransportationLimited.Graphs
             {
                 node = new Node(nodeID, neighbourID);
                 node.ID = nodeID;
-                node.NeighborIDs = new List<int>();
                 nodes.Add(node);
             }
             else {
