@@ -28,12 +28,12 @@ namespace NodeTransportationLimited.Graphs
         /// Check if the start node and end node seem valid
         /// </summary>
         /// <param name="nodes"></param>
-        /// <param name=""></param>
-        /// <param name=""></param>
+        /// <param name="startNode"></param>
+        /// <param name="endNode"></param>
         /// <returns>True if the start node and end node are valid nodes</returns>
-        public static bool isStartAndEndNodesValid(List<Node> nodes, int startValue, int endValue)
+        public static bool isStartAndEndNodesValid(List<Node> nodes, int startNode, int endNode)
         {
-            if (nodes.Exists(n => n.ID == startValue) && nodes.Exists(n => n.ID == endValue)) return true;
+            if (nodes.Exists(n => n.ID == startNode) && nodes.Exists(n => n.ID == endNode)) return true;
             return false;
 
         }

@@ -36,9 +36,60 @@ namespace NodeTransportationLimited.Graphs.ShortestPathFinder
 			
 			System.Console.WriteLine( "Provide graph data now." );
 
+            int numberOfNodes = 0;
 			string nrNodesStr = System.Console.ReadLine();
-			string edgesStr = System.Console.ReadLine();
-			string startEndStr = System.Console.ReadLine();
+            if(!int.TryParse(nrNodesStr, out numberOfNodes))
+            {
+                System.Console.WriteLine("Not a valid number, exiting...");
+                return;
+            }
+            if(!InputHelper.isNumberOfNodesValid(numberOfNodes))
+            {
+                System.Console.WriteLine("Not a valid number, exiting...");
+                return;
+            }
+            string edgesStr = System.Console.ReadLine();
+            var nodes = InputHelper.parseValuePairs(edgesStr);
+            if (nodes == null )
+            {
+                System.Console.WriteLine("Not a valid list of nodes, exiting...");
+                return;
+
+            }
+
+            if(numberOfNodes != nodes.Count)
+            {
+                System.Console.WriteLine("Number of nodes not matching nodes received, exiting...");
+                return;
+            }
+
+            int startNode, endNode;
+            string startEndStr = System.Console.ReadLine();
+            if(!InputHelper.parseBeginAndEndNodes(startEndStr, out startNode, out endNode))
+            {
+                System.Console.WriteLine("Not a valid input of start and endnode, exiting...");
+                return;
+            }
+
+            if(!InputHelper.isStartAndEndNodesValid(nodes,startNode, endNode))
+            {
+                System.Console.WriteLine("Invalid start or endnode, exiting...");
+                return;
+            }
+
+
+
+            // If we got HERE, we have:
+            // a valid number of nodes in numberOfNodes
+            // a list of Nodes in nodes
+            // The starting node in startNode
+            // The end node in endNode
+            // Let the fun begin!!
+
+            
+
+
+
 			string output = null;
 
 			if(
@@ -59,6 +110,9 @@ namespace NodeTransportationLimited.Graphs.ShortestPathFinder
 			}
 
 			System.Console.WriteLine( output );
+
+           
+
 
 // Ni får *inte* göra några fler ändringar efter denna linje utanför denna
 // metods kropp.

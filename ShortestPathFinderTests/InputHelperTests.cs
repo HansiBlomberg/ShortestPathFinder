@@ -60,6 +60,9 @@ namespace NodeTransportationLimited.Graphs.Tests
 
         }
 
+        /// <summary>
+        /// Tests the isStartAndEndNodesValid method
+        /// </summary>
         [TestMethod()]
         public void isStartAndEndNodesValidTest()
         {
