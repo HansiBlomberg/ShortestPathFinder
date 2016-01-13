@@ -24,6 +24,44 @@ namespace NodeTransportationLimited.Graphs
             return true;
         }
 
+        /// <summary>
+        /// Check if the start node and end node seem valid
+        /// </summary>
+        /// <param name="nodes"></param>
+        /// <param name=""></param>
+        /// <param name=""></param>
+        /// <returns>True if the start node and end node are valid nodes</returns>
+        public static bool isStartAndEndNodesValid(List<Node> nodes, int startValue, int endValue)
+        {
+            if (nodes.Exists(n => n.ID == startValue) && nodes.Exists(n => n.ID == endValue)) return true;
+            return false;
+
+        }
+
+
+        /// <summary>
+        /// Parses the input string and returns true if successful with the beginValue and endValue set correctly
+        /// Returns false if not successful, if so the beginValue and endValue is both set to 0
+        /// </summary>
+        /// <param name="input">String with the first and last node in the path as numbers with a space between</param>
+        /// <param name="beginValue">Beginning of path</param>
+        /// <param name="endValue">End of path</param>
+        /// <returns></returns>
+        public static bool parseBeginAndEndNodes(string input, out int beginValue, out int endValue)
+        {
+            
+            beginValue = 0;
+            endValue = 0;
+            // 3: En textsträng med två heltal, som är mindre än antalet noder från första strängen(eftersom första noden är 0).
+            // Talen är skilda med mellanslag
+            // Exempel 0 4
+            var splittedInput = input.Trim().Split(' ');
+            if (splittedInput.Count() != 2 ) return false;
+            if (!int.TryParse(splittedInput[0], out beginValue)) return false;
+            if (!int.TryParse(splittedInput[1], out endValue)) return false;
+            return true;
+
+        }
 
         /// <summary>
         /// Parses a string of valuepairs
