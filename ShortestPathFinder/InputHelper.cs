@@ -30,8 +30,7 @@ namespace NodeTransportationLimited.Graphs
         public List<Node> parseValuePairs(string valuePairs)
         {
             var nodes = new List<Node>();
-
-
+            
             // Lets get rid of accidental spaces
             valuePairs = valuePairs.Trim();
             while (valuePairs.Contains("  "))
@@ -68,54 +67,10 @@ namespace NodeTransportationLimited.Graphs
                         // that we can validate further
                         if(value1 <= 512 && value2 <= 512) // Max 512 nodes!
                         {
-                            // If any of the nodes are new, create them now!
-                            if( nodes.Where(n => n.ID == value1).Count() == 0  )
-                            {
-                                var node = new Node();
-                                node.ID = value1;
-                                node.firstNeighborID = value2;
-                                node.secondNeighborID = -1; // -1 means no neighbour
-                                nodes.Add(node);
-                            } else  {
-                                // If we are here, the node already exists, and if it exists it has also
-                                // a firstNeighborID. Lets make sure secondNeighborID is available!
-                                var node = nodes.Where(n => n.ID == value1).Single();
-                                if(node.secondNeighborID == -1 || node.secondNeighborID == value2 ) {
-                                    node.secondNeighborID = value2;
 
-                                } else {
-                                    return null; // return null because input is bad!
-                                }
-
-                            } // End the if about number of nodes with id == value2 being zero or not
-
-                            // Not DRY yet, but we can refactor when we know it works and is testable
-                            if (nodes.Where(n => n.ID == value2).Count() == 0)
-                            {
-                                var node = new Node();
-                                node.ID = value2;
-                                node.firstNeighborID = value1;
-                                nodes.Add(node);
-                            }
-                            else
-                            {
-                                // If we are here, the node already exists, and if it exists it has also
-                                // a firstNeighborID. Lets make sure secondNeighborID is available!
-                                var node = nodes.Where(n => n.ID == value2).Single();
-                                if (node.secondNeighborID == -1 || node.secondNeighborID == value1)
-                                {
-                                    node.secondNeighborID = value1;
-
-                                }
-                                else
-                                {
-                                    return null; // return null because input is bad!
-                                }
-
-
-                            } // End the if about number of nodes with id == value2 being zero or not
-                         
-
+                            CreateOrUpdateNode(nodes, value1, value2);
+                            CreateOrUpdateNode(nodes, value2, value1);
+                            
                         } // End the if about max 512 nodes
                     } // End the if about tryparsing the value pair
 
@@ -127,6 +82,26 @@ namespace NodeTransportationLimited.Graphs
             return nodes;
 
         }
+
+        private void CreateOrUpdateNode(List<Node> nodes, int nodeID, int neighbourID) {
+
+            Node node;
+
+            // Create new is not exists
+            if (nodes.Where(n => n.ID == nodeID).Count() == 0)
+            {
+                node = new Node();
+                node.ID = nodeID;
+                node.NeighborIDs = new List<int>();
+                nodes.Add(node);
+            }
+
+            // add neighbour
+            node = nodes.Where(n => n.ID == nodeID).Single();
+            node.NeighborIDs.Add(neighbourID);
+
+        }
+
     }
 }
 
