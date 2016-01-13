@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace NodeTransportationLimited.Graphs
 {
-    static class InputHelper
+    public static class InputHelper
     {
 
         /// <summary>
