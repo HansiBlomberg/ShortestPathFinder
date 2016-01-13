@@ -14,10 +14,19 @@ namespace NodeTransportationLimited.Graphs
     /// firstNeighborID = The ID of the first neighbor node
     /// secondNeighborID = The ID of the second neighbor node
     /// </summary>
-    class Node
+    public class Node
     {
+        /// <summary>
+        /// ID of this Node
+        /// </summary>
         public int ID { get; set; }
+        /// <summary>
+        /// List of ID:s of neighbouring nodes
+        /// </summary>
         public List<int> NeighborIDs { get; set; }
+        /// <summary>
+        /// Visited flag to be used by get shortest path algorithm
+        /// </summary>
         public bool isVisited;
 
 
