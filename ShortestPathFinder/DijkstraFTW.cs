@@ -24,18 +24,19 @@ namespace NodeTransportationLimited.Graphs
         public List<Node> GetShortestPathBetweenNodes(List<Node> nodes, Node start, Node end)
         {
 
-            // I decided to run the Dijkstra backwards, might be confusing sorry
+            
             Dijkstra(nodes, end);
+            var nodeStack = new Stack<Node>();
             var returnNodes = new List<Node>();
 
 
             // returnNodes skall vara tom om det inte finns någon start.PreviousID
-            // Return an empty nodes list if there is no start.PreviousID (remember, swapped start/end)
+            // Return an empty nodes list if there is no start.PreviousID
             if (start.PreviousID == null) return returnNodes;
 
             // returnNodes skall bara ha ett värde om PreviousID = end
             // Return a nodes list with just one item if PreviousID = end (remember, swapped start/end)
-            if (start.PreviousID == end.ID)
+            if (start.PreviousID == start.ID)
             {
                 returnNodes.Add(start);
                 return returnNodes;
@@ -43,27 +44,66 @@ namespace NodeTransportationLimited.Graphs
 
             // returnNodes skall ha alla noder inkl start och end om det finns noder mellan
 
-            var nextNodeInPath = start; // Because we ran Dijkstra with swapped start/end, start from parameters is now at the end
-            returnNodes.Add(nextNodeInPath); 
+            var nextNodeInPath = end; 
+            nodeStack.Push(nextNodeInPath); 
             do
             {
                 nextNodeInPath = nodes.Where(n => n.ID == nextNodeInPath.PreviousID).Single();
-                returnNodes.Add(nextNodeInPath);
+                nodeStack.Push(nextNodeInPath);
                 
             } while (nextNodeInPath.ID != end.ID);
 
-
+            foreach (var node in nodeStack) returnNodes.Add(node);
             return returnNodes;
             
         }
-        
+
+
+
+
+        //public List<Node> GetShortestPathBetweenNodes(List<Node> nodes, Node start, Node end)
+        //{
+
+        //    // I decided to run the Dijkstra backwards, might be confusing sorry
+        //    Dijkstra(nodes, end);
+        //    var returnNodes = new List<Node>();
+
+
+        //    // returnNodes skall vara tom om det inte finns någon start.PreviousID
+        //    // Return an empty nodes list if there is no start.PreviousID (remember, swapped start/end)
+        //    if (start.PreviousID == null) return returnNodes;
+
+        //    // returnNodes skall bara ha ett värde om PreviousID = end
+        //    // Return a nodes list with just one item if PreviousID = end (remember, swapped start/end)
+        //    if (start.PreviousID == end.ID)
+        //    {
+        //        returnNodes.Add(start);
+        //        return returnNodes;
+        //    }
+
+        //    // returnNodes skall ha alla noder inkl start och end om det finns noder mellan
+
+        //    var nextNodeInPath = start; // Because we ran Dijkstra with swapped start/end, start from parameters is now at the end
+        //    returnNodes.Add(nextNodeInPath);
+        //    do
+        //    {
+        //        nextNodeInPath = nodes.Where(n => n.ID == nextNodeInPath.PreviousID).Single();
+        //        returnNodes.Add(nextNodeInPath);
+
+        //    } while (nextNodeInPath.ID != end.ID);
+
+
+        //    return returnNodes;
+
+        //}
+
         /// <summary>
         /// 
         /// </summary>
         /// <param name="start">Starting Node</param>
-        
+
         /// /// <param name="nodes">List of nodes in the graph to be searched</param>
-        
+
         private void Dijkstra(List<Node> nodes, Node start )
         {
 
