@@ -6,6 +6,12 @@ using System.Threading.Tasks;
 
 namespace NodeTransportationLimited.Graphs
 {
+    // hej hej hej test
+
+
+
+
+
     /// <summary>
     /// This class holds a node object
     /// 
