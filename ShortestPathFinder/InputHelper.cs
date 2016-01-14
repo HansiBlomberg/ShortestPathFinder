@@ -63,6 +63,28 @@ namespace NodeTransportationLimited.Graphs
 
         }
 
+
+        /// <summary>
+        /// Returns a string representation of a list of nodes
+        /// </summary>
+        /// <param name="nodes"></param>
+        /// <returns>a string representation of a list of nodes</returns>
+        public static string StringifyNodes(List<Node> nodes)
+        {
+            string returnString = "";
+
+            foreach(var node in nodes)
+            {
+                if (returnString != "") returnString += ", ";
+                returnString += node.ID.ToString();
+            }
+
+
+            return returnString;
+        }
+        
+        
+        
         /// <summary>
         /// Parses a string of valuepairs
         /// </summary>
@@ -143,6 +165,8 @@ namespace NodeTransportationLimited.Graphs
             }
 
         }
+
+
 
     }
 }

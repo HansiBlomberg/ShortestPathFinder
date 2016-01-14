@@ -71,5 +71,16 @@ namespace NodeTransportationLimited.Graphs.Tests
             Assert.IsTrue(InputHelper.isStartAndEndNodesValid(nodes, 1, 3));
             Assert.IsFalse(InputHelper.isStartAndEndNodesValid(nodes, 1, 5));
         }
+
+        /// <summary>
+        /// Tests the StringifyNodes method
+        /// </summary>
+        [TestMethod()]
+        public void StringifyNodesTest()
+        {
+            var nodes = InputHelper.parseValuePairs("0 0, 0 1, 1 2");
+            var nodesAsString = InputHelper.StringifyNodes(nodes);
+            Assert.IsTrue(nodesAsString == "0, 1, 2");
+        }
     }
 }
