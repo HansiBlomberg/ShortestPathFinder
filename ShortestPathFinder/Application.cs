@@ -85,29 +85,32 @@ namespace NodeTransportationLimited.Graphs.ShortestPathFinder
             // The starting node in startNode
             // The end node in endNode
             // Let the fun begin!!
+            var algorithm = new DijkstraFTW();
+            var gurka = nodes;
+            var shortestPathNodes = algorithm.GetShortestPathBetweenNodes(nodes, startNode, endNode);
+            var output = InputHelper.StringifyNodes(shortestPathNodes);
 
-            
 
 
 
-			string output = null;
+            // string output = null;
 
-			if(
-				nrNodesStr == "8" &&
-				edgesStr == "0 1, 1 2, 2 3, 3 4, 4 5, 6 7" &&
-				startEndStr == "0 7"
-			)
-			{
-				output = "0, 1, 2, 3, 4, 5, 6, 7";
-			}
-			else if(
-				nrNodesStr == "6" &&
-				edgesStr == "0 1, 0 2, 1 2, 2 3, 2 4, 3 5" &&
-				startEndStr == "0 4"
-			)
-			{
-				output = "0, 2, 4";
-			}
+			//if(
+			//	nrNodesStr == "8" &&
+			//	edgesStr == "0 1, 1 2, 2 3, 3 4, 4 5, 6 7" &&
+			//	startEndStr == "0 7"
+			//)
+			//{
+			//	output = "0, 1, 2, 3, 4, 5, 6, 7";
+			//}
+			//else if(
+			//	nrNodesStr == "6" &&
+			//	edgesStr == "0 1, 0 2, 1 2, 2 3, 2 4, 3 5" &&
+			//	startEndStr == "0 4"
+			//)
+			//{
+			//	output = "0, 2, 4";
+			//}
 
 			System.Console.WriteLine( output );
 

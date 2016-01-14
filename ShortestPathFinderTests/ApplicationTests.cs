@@ -45,34 +45,34 @@ namespace NodeTransportationLimited.Graphs.ShortestPathFinder.Testing
 			}
 		}
 
-/// <summary>
-/// 
-/// </summary>
-/// <exclude/>
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <exclude/>
 		[TestMethod]
-		public void Run_EightNodesOnALine_From0To7()
-		{
-			string output =
-			TestUtilities.RunApp(
-				"8",
-				"0 1, 1 2, 2 3, 3 4, 4 5, 6 7",
-				"0 7"
-			);
+        public void Run_EightNodesOnALine_From0To7()
+        {
+            string output =
+            TestUtilities.RunApp(
+            "8",
+            "0 1, 1 2, 2 3, 3 4, 4 5, 5 6, 6 7",
+            "0 7"
+            );
 
-			Assert.AreEqual(
-				output,
-				readyStr +
-				newLine +
-				"0, 1, 2, 3, 4, 5, 6, 7" +
-				newLine
-			);
-		}
+            Assert.AreEqual(
+            output,
+            readyStr +
+            newLine +
+            "0, 1, 2, 3, 4, 5, 6, 7" +
+            newLine
+            );
+        }
 
-/// <summary>
-/// 
-/// </summary>
-/// <exclude/>
-		[TestMethod]
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <exclude/>
+        [TestMethod]
 		public void Run_OrdinaryGraphWithSixNodes_From0To4()
 		{
 			string output =

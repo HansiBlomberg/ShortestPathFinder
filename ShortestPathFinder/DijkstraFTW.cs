@@ -21,37 +21,45 @@ namespace NodeTransportationLimited.Graphs
         /// <param name="start">Start Node</param>
         /// <param name="end">End Node</param>
         /// <returns></returns>
-        public List<Node> GetShortestPathBetweenNodes(List<Node> nodes, Node start, Node end)
+        public List<Node> GetShortestPathBetweenNodes(List<Node> nodes, int start, int end)
         {
 
-            
-            Dijkstra(nodes, end);
-            var nodeStack = new Stack<Node>();
             var returnNodes = new List<Node>();
+            var startNode = nodes.Where(n => n.ID == start).Single();
+            var endNode = nodes.Where(n => n.ID == end).Single();
 
-
-            // returnNodes skall vara tom om det inte finns någon start.PreviousID
-            // Return an empty nodes list if there is no start.PreviousID
-            if (start.PreviousID == null) return returnNodes;
-
-            // returnNodes skall bara ha ett värde om PreviousID = end
-            // Return a nodes list with just one item if PreviousID = end (remember, swapped start/end)
-            if (start.PreviousID == start.ID)
+            // If start node and end node is the same, we can cheat
+            if (start == end)
             {
-                returnNodes.Add(start);
+                returnNodes.Add(startNode);
                 return returnNodes;
             }
 
+
+
+            Dijkstra(nodes, startNode);
+            var nodeStack = new Stack<Node>();
+            
+
+
+            
+
+            // returnNodes skall vara tom om det inte finns någon end.PreviousID
+            // Return an empty nodes list if there is no end.PreviousID
+            if (endNode.PreviousID == null) return returnNodes;
+
+            
+
             // returnNodes skall ha alla noder inkl start och end om det finns noder mellan
 
-            var nextNodeInPath = end; 
+            var nextNodeInPath = endNode;  // nod 4, previous = 3
             nodeStack.Push(nextNodeInPath); 
             do
             {
                 nextNodeInPath = nodes.Where(n => n.ID == nextNodeInPath.PreviousID).Single();
-                nodeStack.Push(nextNodeInPath);
+                nodeStack.Push(nextNodeInPath); // 1: pushar nod 3 med prev 0
                 
-            } while (nextNodeInPath.ID != end.ID);
+            } while (nextNodeInPath.ID != startNode.ID); // 1: 
 
             foreach (var node in nodeStack) returnNodes.Add(node);
             return returnNodes;
