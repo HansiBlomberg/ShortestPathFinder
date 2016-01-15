@@ -90,5 +90,29 @@ namespace NodeTransportationLimited.Graphs.ShortestPathFinder.Testing
 				newLine
 			);
 		}
-	}
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <exclude/>
+        [TestMethod]
+        public void Run_EightNodesOnALine_From0To7OtherWayAround()
+        {
+            string output =
+            TestUtilities.RunApp(
+            "8",
+            "0 1, 1 2, 2 3, 3 4, 4 5, 5 6, 6 7",
+            "7 0"
+            );
+
+            Assert.AreEqual(
+            output,
+            readyStr +
+            newLine +
+            "7, 6, 5, 4, 3, 2, 1, 0" +
+            newLine
+            );
+        }
+
+    }
 }
