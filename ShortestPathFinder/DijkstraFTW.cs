@@ -29,8 +29,16 @@ namespace NodeTransportationLimited.Graphs
             // Handle the case of start or end not existing in the nodes list
             // This will happen because we only create nodes with paths
             // but the user might enter a start or end node that does not have a path.
-            // We can just return an empty list of notes in this case.
-            if (!nodes.Exists(n => n.ID == start) || !nodes.Exists(n => n.ID == end)) return returnNodes;
+            // We can just return an empty list of notes, unless start = end where we
+            // will return that one node.
+            if (!nodes.Exists(n => n.ID == start) || !nodes.Exists(n => n.ID == end))
+            {
+                if(start == end)  returnNodes.Add(new Node(start));
+             
+                
+                  
+                return returnNodes;
+            }
 
 
 

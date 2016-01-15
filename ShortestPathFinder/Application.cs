@@ -57,11 +57,11 @@ namespace NodeTransportationLimited.Graphs.ShortestPathFinder
 
             }
 
-            if(numberOfNodes != nodes.Count)
-            {
-                System.Console.WriteLine("Number of nodes not matching nodes received, exiting...");
-                return;
-            }
+            //if(numberOfNodes != nodes.Count)
+            //{
+            //    System.Console.WriteLine("Number of nodes not matching nodes received, exiting...");
+            //    return;
+            //}
 
             int startNode, endNode;
             string startEndStr = System.Console.ReadLine();
