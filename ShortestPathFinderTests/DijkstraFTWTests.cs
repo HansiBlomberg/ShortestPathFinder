@@ -62,11 +62,67 @@ namespace NodeTransportationLimited.Graphs.Tests
 
 
 
+            // Test with weighted nodes
+            nodes = InputHelper.parseValuePairs("0 1, 1 2, 2 3, 3 4, 4 5, 5 6, 6 7, 1 10, 10 7 10");
+            start = 1;
+            end = 7;
+            shortestPathNodes = algorithm.GetShortestPathBetweenNodes(nodes, start, end);
+            nodesAsString = InputHelper.StringifyNodes(shortestPathNodes);
+            Assert.IsTrue(nodesAsString == "1, 2, 3, 4, 5, 6, 7", "Test # 5 failed");
+
+            //// Test with weighted nodes other way around, we have a problem with this atm
+            //nodes = InputHelper.parseValuePairs("0 1, 1 2, 2 3, 3 4, 4 5, 5 6, 6 7, 1 10, 10 7 10");
+            //start = 7;
+            //end = 1;
+            //shortestPathNodes = algorithm.GetShortestPathBetweenNodes(nodes, start, end);
+            //nodesAsString = InputHelper.StringifyNodes(shortestPathNodes);
+            //Assert.IsTrue(nodesAsString == "7, 6, 5, 4, 3, 2, 1", "Test # 6 failed");
+
+
 
 
 
 
 
         }
+
+
+        /// <summary>
+        /// Currently failing test cases for GetShortestPathBetweenNodes
+        /// </summary>
+        [TestMethod()]
+        public void FailingGetShortestPathBetweenNodesTest()
+        {
+
+            var algorithm = new DijkstraFTW();
+
+
+            List<Node> nodes;
+            int start = 0;
+            int end = 4;
+            List<Node> shortestPathNodes;
+            string nodesAsString;
+            
+
+
+
+          
+
+            // Test with weighted nodes other way around, we have a problem with this atm
+            nodes = InputHelper.parseValuePairs("0 1, 1 2, 2 3, 3 4, 4 5, 5 6, 6 7, 1 10, 10 7 10");
+            start = 7;
+            end = 1;
+            shortestPathNodes = algorithm.GetShortestPathBetweenNodes(nodes, start, end);
+            nodesAsString = InputHelper.StringifyNodes(shortestPathNodes);
+            Assert.IsTrue(nodesAsString == "7, 6, 5, 4, 3, 2, 1", "Test # 6 failed");
+
+
+
+
+
+
+
+        }
+
     }
 }

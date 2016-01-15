@@ -119,22 +119,31 @@ namespace NodeTransportationLimited.Graphs
                 // Do some sanity checking before creating
                 // and adding a Node object to the nodes collection
                 
-                if(splitPairs.Count() == 2) { // Only 2 is a pair!
+                if(splitPairs.Count() == 2 || splitPairs.Count() == 3) { // Only 2 or 3 is a valid "pair"
 
                     // Now we can access splitPairs[0] and splitPairs[1]
                     // without being scared of out of range runtime errors...
 
                     // Now, make sure we have valid values in the pair
-                    int value1, value2;
-                    if ( int.TryParse(splitPairs[0], out value1) && int.TryParse(splitPairs[1], out value2) )
+                    int node1, node2;
+                    int pathWeight=1; // Default pathWeight = 1
+                   
+                    if ( int.TryParse(splitPairs[0], out node1) && int.TryParse(splitPairs[1], out node2) )
                     {
                         // If we are here, both value1 and value2 are good integers
                         // that we can validate further
-                        if(value1 <= 512 && value2 <= 512) // Max 512 nodes!
+
+                        // Lets se if we got a valid pathWeight value also
+                        if(splitPairs.Count() == 3)
+                             if (!int.TryParse(splitPairs[2], out pathWeight)) pathWeight = 1; // Make sure we always have a valid pathweight value
+                           
+
+
+                        if (node1 <= 512 && node2 <= 512) // Max 512 nodes!
                         {
 
-                            CreateOrUpdateNode(nodes, value1, value2);
-                            CreateOrUpdateNode(nodes, value2, value1);
+                            CreateOrUpdateNode(nodes, node1, node2, pathWeight);
+                            CreateOrUpdateNode(nodes, node2, node1, pathWeight);
                             
                         } // End the if about max 512 nodes
                     } // End the if about tryparsing the value pair
@@ -152,12 +161,20 @@ namespace NodeTransportationLimited.Graphs
 
             Node node;
 
-            // Create new is not exists
+            // Create new node if not exists
             if (nodes.Where(n => n.ID == nodeID).Count() == 0)
             {
-                node = new Node(nodeID, neighbourID);
+                node = new Node(nodeID, neighbourID, neighbourWeight);
                 node.ID = nodeID;
+
+                //// Update this nodes neighbour with this node as its neighbour
+                //var neighbour = new Neighbour();
+                //neighbour.ID = nodeID;
+                //neighbour.Weight = neighbourWeight; // it is the same both ways
+                //nodes.Where(n => n.ID == neighbourID).Single().Neighbours.Add(neighbour);
+
                 nodes.Add(node);
+                
             }
             else {
 
@@ -167,6 +184,15 @@ namespace NodeTransportationLimited.Graphs
                 neighbour.ID = neighbourID;
                 neighbour.Weight = neighbourWeight;
                 node.Neighbours.Add(neighbour);
+
+                //// add existing node as neighbour in neighbours neighbour list (wow!)
+
+                //neighbour = new Neighbour();
+                //neighbour.ID = node.ID;
+                //neighbour.Weight = neighbourWeight;
+                //nodes.Where(n => n.ID == neighbourID).Single().Neighbours.Add(neighbour);
+
+
             }
 
         }
