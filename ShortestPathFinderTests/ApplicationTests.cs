@@ -91,13 +91,11 @@ namespace NodeTransportationLimited.Graphs.ShortestPathFinder.Testing
 			);
 		}
 
-
-
         /// <summary>
         /// 
         /// </summary>
         /// <exclude/>
-		[TestMethod]
+        [TestMethod]
         public void Run_EightNodesOnALine_From0To7OtherWayAround()
         {
             string output =
