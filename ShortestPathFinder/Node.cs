@@ -6,12 +6,6 @@ using System.Threading.Tasks;
 
 namespace NodeTransportationLimited.Graphs
 {
-    // hej hej hej test
-
-
-
-
-
     /// <summary>
     /// This class holds a node object
     /// 
@@ -34,7 +28,8 @@ namespace NodeTransportationLimited.Graphs
         /// Visited flag to be used by get shortest path algorithm
         /// </summary>
         public bool isVisited;
-
+        public bool Start;
+        public bool Destination;
 
        /// <summary>
        /// Constructor - will create a new Node with one neighbour Node ID

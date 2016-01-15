@@ -33,9 +33,10 @@ namespace NodeTransportationLimited.Graphs
         /// <returns>True if the start node and end node are valid nodes</returns>
         public static bool isStartAndEndNodesValid(List<Node> nodes, int startNode, int endNode)
         {
-            if (nodes.Exists(n => n.ID == startNode) && nodes.Exists(n => n.ID == endNode)) return true;
-            return false;
-
+            if (nodes.Exists(n => n.ID == startNode) && nodes.Exists(n => n.ID == endNode))
+                return true;
+            else
+                return false;
         }
 
 
@@ -49,18 +50,17 @@ namespace NodeTransportationLimited.Graphs
         /// <returns></returns>
         public static bool parseBeginAndEndNodes(string input, out int beginValue, out int endValue)
         {
-            
+
             beginValue = 0;
             endValue = 0;
             // 3: En textsträng med två heltal, som är mindre än antalet noder från första strängen(eftersom första noden är 0).
             // Talen är skilda med mellanslag
             // Exempel 0 4
             var splittedInput = input.Trim().Split(' ');
-            if (splittedInput.Count() != 2 ) return false;
+            if (splittedInput.Count() != 2) return false;
             if (!int.TryParse(splittedInput[0], out beginValue)) return false;
             if (!int.TryParse(splittedInput[1], out endValue)) return false;
             return true;
-
         }
 
         /// <summary>
@@ -71,19 +71,19 @@ namespace NodeTransportationLimited.Graphs
         public static List<Node> parseValuePairs(string valuePairs)
         {
             var nodes = new List<Node>();
-            
+
             // Lets get rid of accidental spaces
             valuePairs = valuePairs.Trim();
             while (valuePairs.Contains("  "))
             {
                 valuePairs.Replace("  ", " "); // Replace two spaces with one space until no double spaces left
             }
-            
+
             if (valuePairs == "") return nodes; // Check the empty string use case
 
             // Extract the valuePairs into the array allThePairs
             var allThePairs = valuePairs.Split(',');
-            if ( allThePairs.Count() > 262144 )
+            if (allThePairs.Count() > 262144)
             {
                 return null; // Return null if too many pairs
             }
@@ -94,24 +94,25 @@ namespace NodeTransportationLimited.Graphs
 
                 // Do some sanity checking before creating
                 // and adding a Node object to the nodes collection
-                
-                if(splitPairs.Count() == 2) { // Only 2 is a pair!
+
+                if (splitPairs.Count() == 2)
+                { // Only 2 is a pair!
 
                     // Now we can access splitPairs[0] and splitPairs[1]
                     // without being scared of out of range runtime errors...
 
                     // Now, make sure we have valid values in the pair
                     int value1, value2;
-                    if ( int.TryParse(splitPairs[0], out value1) && int.TryParse(splitPairs[1], out value2) )
+                    if (int.TryParse(splitPairs[0], out value1) && int.TryParse(splitPairs[1], out value2))
                     {
                         // If we are here, both value1 and value2 are good integers
                         // that we can validate further
-                        if(value1 <= 512 && value2 <= 512) // Max 512 nodes!
+                        if (value1 <= 512 && value2 <= 512) // Max 512 nodes!
                         {
 
                             CreateOrUpdateNode(nodes, value1, value2);
                             CreateOrUpdateNode(nodes, value2, value1);
-                            
+
                         } // End the if about max 512 nodes
                     } // End the if about tryparsing the value pair
 
@@ -124,7 +125,8 @@ namespace NodeTransportationLimited.Graphs
 
         }
 
-        private static void CreateOrUpdateNode(List<Node> nodes, int nodeID, int neighbourID) {
+        private static void CreateOrUpdateNode(List<Node> nodes, int nodeID, int neighbourID)
+        {
 
             Node node;
 
@@ -135,7 +137,8 @@ namespace NodeTransportationLimited.Graphs
                 node.ID = nodeID;
                 nodes.Add(node);
             }
-            else {
+            else
+            {
 
                 // add neighbour to existing node
                 node = nodes.Where(n => n.ID == nodeID).Single();
