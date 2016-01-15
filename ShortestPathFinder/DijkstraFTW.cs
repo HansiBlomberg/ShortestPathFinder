@@ -179,7 +179,7 @@ namespace NodeTransportationLimited.Graphs
             if (smallestDistanceNode == null) return null;
             foreach(var node in nodes.Where(n=>n.Distance != null))
             {
-                if (node.Distance < smallestDistanceNode.Distance) smallestDistanceNode = node;
+                if (node.Distance < smallestDistanceNode.Distance || smallestDistanceNode.Distance == null) smallestDistanceNode = node;
             }
             return smallestDistanceNode;
 
