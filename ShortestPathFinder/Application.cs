@@ -71,7 +71,7 @@ namespace NodeTransportationLimited.Graphs.ShortestPathFinder
                 return;
             }
 
-            if(!InputHelper.isStartAndEndNodesValid(nodes,startNode, endNode))
+            if(!InputHelper.isStartAndEndNodesValid(numberOfNodes,startNode, endNode))
             {
                 System.Console.WriteLine("Invalid start or endnode, exiting...");
                 return;
@@ -113,6 +113,7 @@ namespace NodeTransportationLimited.Graphs.ShortestPathFinder
 			//}
 
 			System.Console.WriteLine( output );
+            // System.Console.ReadLine();
 
            
 

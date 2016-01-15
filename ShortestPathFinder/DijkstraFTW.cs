@@ -25,6 +25,15 @@ namespace NodeTransportationLimited.Graphs
         {
 
             var returnNodes = new List<Node>();
+
+            // Handle the case of start or end not existing in the nodes list
+            // This will happen because we only create nodes with paths
+            // but the user might enter a start or end node that does not have a path.
+            // We can just return an empty list of notes in this case.
+            if (!nodes.Exists(n => n.ID == start) || !nodes.Exists(n => n.ID == end)) return returnNodes;
+
+
+
             var startNode = nodes.Where(n => n.ID == start).Single();
             var endNode = nodes.Where(n => n.ID == end).Single();
 
@@ -44,8 +53,9 @@ namespace NodeTransportationLimited.Graphs
 
             
 
-            // returnNodes skall vara tom om det inte finns någon end.PreviousID
+            
             // Return an empty nodes list if there is no end.PreviousID
+            // This handles the case when there is no path from endNode towards startnode.
             if (endNode.PreviousID == null) return returnNodes;
 
             
@@ -133,13 +143,13 @@ namespace NodeTransportationLimited.Graphs
                 
                 var node = NodeWithShortestDistance(unoptimizedNodes);
                 unoptimizedNodes.Remove(node);
-                foreach(var neighbourID in node.NeighborIDs)
+                foreach(var neighbour in node.Neighbours)
                 {
-                    var neighbourNode = nodes.Where(n => n.ID == neighbourID).Single();
+                    var neighbourNode = nodes.Where(n => n.ID == neighbour.ID).Single();
                     // what if node.distance = null
                     if (node.Distance != null)
                     {
-                        var alternativeDistance = node.Distance + 1;
+                        var alternativeDistance = node.Distance + neighbour.Weight;
                         if (alternativeDistance < neighbourNode.Distance || neighbourNode.Distance == null)
                         {
                             neighbourNode.Distance = alternativeDistance;

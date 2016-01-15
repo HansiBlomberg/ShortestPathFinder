@@ -27,13 +27,15 @@ namespace NodeTransportationLimited.Graphs
         /// <summary>
         /// Check if the start node and end node seem valid
         /// </summary>
-        /// <param name="nodes"></param>
-        /// <param name="startNode"></param>
-        /// <param name="endNode"></param>
+        /// <param name="numberOfNodes">Number of nodes in the graph</param>
+        /// <param name="startNode">Start node</param>
+        /// <param name="endNode">End node</param>
         /// <returns>True if the start node and end node are valid nodes</returns>
-        public static bool isStartAndEndNodesValid(List<Node> nodes, int startNode, int endNode)
+        public static bool isStartAndEndNodesValid(int numberOfNodes, int startNode, int endNode)
         {
-            if (nodes.Exists(n => n.ID == startNode) && nodes.Exists(n => n.ID == endNode)) return true;
+            // We dont create all nodes, only nodes that have neighbours
+            // if (nodes.Exists(n => n.ID == startNode) && nodes.Exists(n => n.ID == endNode)) return true;
+            if (startNode >= 0 && startNode < numberOfNodes && endNode >= 0 && endNode < numberOfNodes) return true;
             return false;
 
         }
@@ -146,7 +148,7 @@ namespace NodeTransportationLimited.Graphs
 
         }
 
-        private static void CreateOrUpdateNode(List<Node> nodes, int nodeID, int neighbourID) {
+        private static void CreateOrUpdateNode(List<Node> nodes, int nodeID, int neighbourID, int neighbourWeight = 1) {
 
             Node node;
 
@@ -161,7 +163,10 @@ namespace NodeTransportationLimited.Graphs
 
                 // add neighbour to existing node
                 node = nodes.Where(n => n.ID == nodeID).Single();
-                node.NeighborIDs.Add(neighbourID);
+                var neighbour = new Neighbour();
+                neighbour.ID = neighbourID;
+                neighbour.Weight = neighbourWeight;
+                node.Neighbours.Add(neighbour);
             }
 
         }

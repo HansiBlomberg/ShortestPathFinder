@@ -29,9 +29,9 @@ namespace NodeTransportationLimited.Graphs
 
 
         /// <summary>
-        /// List of ID:s of neighbouring nodes
+        /// List of neighbours
         /// </summary>
-        public List<int> NeighborIDs { get; set; }
+        public List<Neighbour> Neighbours { get; set; }
        
         /// <summary>
         /// Visited flag to be used by get shortest path algorithm
@@ -48,13 +48,35 @@ namespace NodeTransportationLimited.Graphs
         /// Constructor - will create a new Node with one neighbour Node ID
         /// 
         /// </summary>
-        /// <param name="id"></param>
-        /// <param name="neighbourID"></param>
-        public Node(int id, int neighbourID)
+        /// <param name="id">ID of new node</param>
+        /// <param name="neighbourID">ID of neighbour node</param>
+        /// <param name="neighbourWeight">Optional Weight of neighbour path</param>
+        public Node(int id, int neighbourID, int neighbourWeight = 1)
         {
+
             this.ID = id;
-            this.NeighborIDs = new List<int>();
-            NeighborIDs.Add(neighbourID);
+            this.Neighbours = new List<Neighbour>();
+            var neighbour = new Neighbour();
+            neighbour.ID = neighbourID;
+            neighbour.Weight = neighbourWeight;
+            Neighbours.Add(neighbour);
+            this.IsVisited = false;
+            this.Distance = null; // null is for infinity
+            this.PreviousID = null; // null until found
+        }
+
+
+        /// <summary>
+        /// Constructor - will create a new Node without neighbours
+        /// 
+        /// </summary>
+        /// <param name="id">ID of new node</param>
+       
+        public Node(int id)
+        {
+
+            this.ID = id;
+            this.Neighbours = new List<Neighbour>();
             this.IsVisited = false;
             this.Distance = null; // null is for infinity
             this.PreviousID = null; // null until found
@@ -63,6 +85,22 @@ namespace NodeTransportationLimited.Graphs
     }
 
 
+    /// <summary>
+    /// Struct to hold Neighbour ID and its weight
+    /// </summary>
+    public struct Neighbour
+    {
+        /// <summary>
+        /// ID of neighbour Node
+        /// </summary>
+        public int ID { get; set; }
+        
+        /// <summary>
+        /// Weight of connection between this node and neighbour node
+        /// </summary>
+        public int Weight { get; set; }
+
+    }
 
 
 }
