@@ -114,5 +114,30 @@ namespace NodeTransportationLimited.Graphs.ShortestPathFinder.Testing
             );
         }
 
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <exclude/>
+        [TestMethod]
+        public void Run_TwentyNodesWithSeveralPossiblePathsWithDifferentLength()
+        {
+            string output =
+            TestUtilities.RunApp(
+            "21",
+            "1 2, 2 3, 3 4, 4 5, 5 12, 1 6, 6 8, 8 9, 9 11, 11 13, 12 13, 1 10, 10 10, 10 7, 7 12, 14 15, 15 16, 16 14, 20 19, 10 3, 4 7, 6 4, 7 5",
+            "1 13"
+            );
+
+            Assert.AreEqual(
+            output,
+            readyStr +
+            newLine +
+            "1, 10, 7, 12, 13" +
+            newLine
+            );
+        }
+
     }
 }

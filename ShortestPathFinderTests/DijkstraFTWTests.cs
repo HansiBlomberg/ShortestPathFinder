@@ -14,6 +14,11 @@ namespace NodeTransportationLimited.Graphs.Tests
     [TestClass()]
     public class DijkstraFTWTests
     {
+
+        private Random random = new Random();
+
+
+
         /// <summary>
         /// Test cases for GetShortestPathBetweenNodes
         /// </summary>
@@ -78,12 +83,50 @@ namespace NodeTransportationLimited.Graphs.Tests
             nodesAsString = InputHelper.StringifyNodes(shortestPathNodes);
             Assert.IsTrue(nodesAsString == "7, 6, 5, 4, 3, 2, 1", "Test # 6 failed");
 
-
-
+             
         }
 
 
-      
+        /// <summary>
+        /// Test cases for GetShortestPathBetweenNodes
+        /// This time the order of nodes is randomized before
+        /// we send it to the algorithm
+        /// </summary>
+        [TestMethod()]
+        public void RandomizedGetShortestPathBetweenNodesTest()
+        {
 
+            var algorithm = new DijkstraFTW();
+            var start = 1;
+            var end = 13;
+
+            var nodes = InputHelper.parseValuePairs("1 2, 2 3, 3 4, 4 5, 5 12, 1 6, 6 8, 8 9, 9 11, 11 13, 12 13, 1 10, 10 10, 10 7, 7 12, 14 15, 15 16, 16 14, 20 19, 10 3, 4 7, 6 4, 7 5");
+
+            for (int i = 0; i < 20; i++)
+            {
+                MakeNodeOrderRandom(nodes);
+                var shortestPathNodes = algorithm.GetShortestPathBetweenNodes(nodes, start, end);
+                var nodesAsString = InputHelper.StringifyNodes(shortestPathNodes);
+                Assert.IsTrue(nodesAsString == "1, 10, 7, 12, 13", "Test # 1 failed");
+             }
+
+        }
+
+        private void MakeNodeOrderRandom(List<Node> nodes)
+        {
+           
+
+            int n = nodes.Count;
+            while (n > 1)
+            {
+                n--;
+                int k = random.Next(n + 1);
+                Node node = nodes[k];
+                nodes[k] = nodes[n];
+                nodes[n] = node;
+            }
+            
+        }
+    
     }
 }
