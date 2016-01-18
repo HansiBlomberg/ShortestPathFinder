@@ -7,8 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShortestPathFinder", "Short
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShortestPathFinderTests", "ShortestPathFinderTests\ShortestPathFinderTests.csproj", "{7F4053C8-878E-48CE-BE45-A51BFB77CCFF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TempConsoleAppForTesting", "TempConsoleAppForTesting\TempConsoleAppForTesting.csproj", "{6FA4A0D8-CC6C-461F-90BC-091509E038DF}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,10 +21,6 @@ Global
 		{7F4053C8-878E-48CE-BE45-A51BFB77CCFF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7F4053C8-878E-48CE-BE45-A51BFB77CCFF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7F4053C8-878E-48CE-BE45-A51BFB77CCFF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6FA4A0D8-CC6C-461F-90BC-091509E038DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6FA4A0D8-CC6C-461F-90BC-091509E038DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6FA4A0D8-CC6C-461F-90BC-091509E038DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6FA4A0D8-CC6C-461F-90BC-091509E038DF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

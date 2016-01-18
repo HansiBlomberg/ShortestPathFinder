@@ -11,8 +11,9 @@ namespace NodeTransportationLimited.Graphs
     /// 
     /// Properties:
     /// ID = The ID of the node object
-    /// firstNeighborID = The ID of the first neighbor node
-    /// secondNeighborID = The ID of the second neighbor node
+    /// PreviousID = The ID of the next node towards the begin node, NULL if unknown
+    /// Neighbours = List of Neighbour Nodes
+    /// Distance = Distance to the begin node, NULL if infinity/unknown
     /// </summary>
     public class Node
     {
@@ -33,11 +34,7 @@ namespace NodeTransportationLimited.Graphs
         /// </summary>
         public List<Neighbour> Neighbours { get; set; }
        
-        /// <summary>
-        /// Visited flag to be used by get shortest path algorithm
-        /// </summary>
-        public bool IsVisited;
-
+ 
         /// <summary>
         /// Distance property, shortest found distance to start node
         /// </summary>
@@ -60,7 +57,6 @@ namespace NodeTransportationLimited.Graphs
             neighbour.ID = neighbourID;
             neighbour.Weight = neighbourWeight;
             Neighbours.Add(neighbour);
-            this.IsVisited = false;
             this.Distance = null; // null is for infinity
             this.PreviousID = null; // null until found
         }
@@ -77,7 +73,6 @@ namespace NodeTransportationLimited.Graphs
 
             this.ID = id;
             this.Neighbours = new List<Neighbour>();
-            this.IsVisited = false;
             this.Distance = null; // null is for infinity
             this.PreviousID = null; // null until found
         }

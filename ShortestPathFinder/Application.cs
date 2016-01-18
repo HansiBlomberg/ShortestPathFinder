@@ -43,13 +43,15 @@ namespace NodeTransportationLimited.Graphs.ShortestPathFinder
                 System.Console.WriteLine("Not a valid number, exiting...");
                 return;
             }
-            if(!InputHelper.isNumberOfNodesValid(numberOfNodes))
+
+            if (!InputHelper.IsNumberOfNodesValid(numberOfNodes))
             {
                 System.Console.WriteLine("Not a valid number, exiting...");
                 return;
             }
             string edgesStr = System.Console.ReadLine();
-            var nodes = InputHelper.parseValuePairs(edgesStr);
+            var nodes = InputHelper.ParseValuePairs(edgesStr);
+
             if (nodes == null )
             {
                 System.Console.WriteLine("Not a valid list of nodes, exiting...");
@@ -57,26 +59,20 @@ namespace NodeTransportationLimited.Graphs.ShortestPathFinder
 
             }
 
-            //if(numberOfNodes != nodes.Count)
-            //{
-            //    System.Console.WriteLine("Number of nodes not matching nodes received, exiting...");
-            //    return;
-            //}
-
+      
             int startNode, endNode;
             string startEndStr = System.Console.ReadLine();
-            if(!InputHelper.parseBeginAndEndNodes(startEndStr, out startNode, out endNode))
+            if(!InputHelper.ParseBeginAndEndNodes(startEndStr, out startNode, out endNode))
             {
                 System.Console.WriteLine("Not a valid input of start and endnode, exiting...");
                 return;
             }
 
-            if(!InputHelper.isStartAndEndNodesValid(numberOfNodes,startNode, endNode))
+            if(!InputHelper.IsStartAndEndNodesValid(numberOfNodes,startNode, endNode))
             {
                 System.Console.WriteLine("Invalid start or endnode, exiting...");
                 return;
             }
-
 
 
             // If we got HERE, we have:
@@ -86,35 +82,11 @@ namespace NodeTransportationLimited.Graphs.ShortestPathFinder
             // The end node in endNode
             // Let the fun begin!!
             var algorithm = new DijkstraFTW();
-            var gurka = nodes;
             var shortestPathNodes = algorithm.GetShortestPathBetweenNodes(nodes, startNode, endNode);
             var output = InputHelper.StringifyNodes(shortestPathNodes);
 
-
-
-
-            // string output = null;
-
-			//if(
-			//	nrNodesStr == "8" &&
-			//	edgesStr == "0 1, 1 2, 2 3, 3 4, 4 5, 6 7" &&
-			//	startEndStr == "0 7"
-			//)
-			//{
-			//	output = "0, 1, 2, 3, 4, 5, 6, 7";
-			//}
-			//else if(
-			//	nrNodesStr == "6" &&
-			//	edgesStr == "0 1, 0 2, 1 2, 2 3, 2 4, 3 5" &&
-			//	startEndStr == "0 4"
-			//)
-			//{
-			//	output = "0, 2, 4";
-			//}
-
 			System.Console.WriteLine( output );
-            // System.Console.ReadLine();
-
+       
            
 
 

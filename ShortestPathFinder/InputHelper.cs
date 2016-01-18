@@ -12,15 +12,22 @@ namespace NodeTransportationLimited.Graphs
     public static class InputHelper
     {
 
+        // God knows why, but the application is only allowed to handle a maximum of 512 nodes.
+        // Maybe because the MS DOS command line lenght is limited to 2048 or so characters?
+        private const int MAX_ALLOWED_NODES = 512;
+        private const int MAX_ALLOWED_EDGES = 262144;
+
+
+
         /// <summary>
         /// Checks if the number of nodes is within the specified
         /// range.
         /// </summary>
         /// <param name="numberOfNodes"></param>
         /// <returns>True if the number of nodes is acceptable</returns>
-        public static bool isNumberOfNodesValid(int numberOfNodes)
+        public static bool IsNumberOfNodesValid(int numberOfNodes)
         {
-            if (numberOfNodes < 1 || numberOfNodes > 512) return false;
+            if (numberOfNodes < 1 || numberOfNodes > MAX_ALLOWED_NODES) return false;
             return true;
         }
 
@@ -31,7 +38,7 @@ namespace NodeTransportationLimited.Graphs
         /// <param name="startNode">Start node</param>
         /// <param name="endNode">End node</param>
         /// <returns>True if the start node and end node are valid nodes</returns>
-        public static bool isStartAndEndNodesValid(int numberOfNodes, int startNode, int endNode)
+        public static bool IsStartAndEndNodesValid(int numberOfNodes, int startNode, int endNode)
         {
             // We dont create all nodes, only nodes that have neighbours
             // if (nodes.Exists(n => n.ID == startNode) && nodes.Exists(n => n.ID == endNode)) return true;
@@ -49,7 +56,7 @@ namespace NodeTransportationLimited.Graphs
         /// <param name="beginValue">Beginning of path</param>
         /// <param name="endValue">End of path</param>
         /// <returns></returns>
-        public static bool parseBeginAndEndNodes(string input, out int beginValue, out int endValue)
+        public static bool ParseBeginAndEndNodes(string input, out int beginValue, out int endValue)
         {
             
             beginValue = 0;
@@ -92,7 +99,7 @@ namespace NodeTransportationLimited.Graphs
         /// </summary>
         /// <param name="valuePairs"></param>
         /// <returns>A collection of Node or NULL if bad input data</returns>
-        public static List<Node> parseValuePairs(string valuePairs)
+        public static List<Node> ParseValuePairs(string valuePairs)
         {
             var nodes = new List<Node>();
             
@@ -107,7 +114,7 @@ namespace NodeTransportationLimited.Graphs
 
             // Extract the valuePairs into the array allThePairs
             var allThePairs = valuePairs.Split(',');
-            if ( allThePairs.Count() > 262144 )
+            if ( allThePairs.Count() > MAX_ALLOWED_EDGES )
             {
                 return null; // Return null if too many pairs
             }
@@ -119,13 +126,15 @@ namespace NodeTransportationLimited.Graphs
                 // Do some sanity checking before creating
                 // and adding a Node object to the nodes collection
                 
-                if(splitPairs.Count() == 2 || splitPairs.Count() == 3) { // Only 2 or 3 is a valid "pair"
+                if(splitPairs.Count() == 2 || splitPairs.Count() == 3)  // Only 2 or 3 is a valid "pair"
+                // if (splitPairs.Count() == 2)  // Replace the line above with this line to kill the support for weighted graphs. Dijkstra will be rotating in his grave though
+                    { // Only 2 or 3 is a valid "pair"
 
-                    // Now we can access splitPairs[0] and splitPairs[1]
-                    // without being scared of out of range runtime errors...
+                        // Now we can access splitPairs[0] and splitPairs[1]
+                        // without being scared of out of range runtime errors...
 
-                    // Now, make sure we have valid values in the pair
-                    int node1, node2;
+                        // Now, make sure we have valid values in the pair
+                        int node1, node2;
                     int pathWeight=1; // Default pathWeight = 1
                    
                     if ( int.TryParse(splitPairs[0], out node1) && int.TryParse(splitPairs[1], out node2) )
@@ -137,7 +146,6 @@ namespace NodeTransportationLimited.Graphs
                         if(splitPairs.Count() == 3)
                              if (!int.TryParse(splitPairs[2], out pathWeight)) pathWeight = 1; // Make sure we always have a valid pathweight value
                            
-
 
                         if (node1 <= 512 && node2 <= 512) // Max 512 nodes!
                         {
@@ -166,13 +174,6 @@ namespace NodeTransportationLimited.Graphs
             {
                 node = new Node(nodeID, neighbourID, neighbourWeight);
                 node.ID = nodeID;
-
-                //// Update this nodes neighbour with this node as its neighbour
-                //var neighbour = new Neighbour();
-                //neighbour.ID = nodeID;
-                //neighbour.Weight = neighbourWeight; // it is the same both ways
-                //nodes.Where(n => n.ID == neighbourID).Single().Neighbours.Add(neighbour);
-
                 nodes.Add(node);
                 
             }
@@ -185,56 +186,12 @@ namespace NodeTransportationLimited.Graphs
                 neighbour.Weight = neighbourWeight;
                 node.Neighbours.Add(neighbour);
 
-                //// add existing node as neighbour in neighbours neighbour list (wow!)
-
-                //neighbour = new Neighbour();
-                //neighbour.ID = node.ID;
-                //neighbour.Weight = neighbourWeight;
-                //nodes.Where(n => n.ID == neighbourID).Single().Neighbours.Add(neighbour);
-
-
             }
 
         }
-
-
 
     }
 }
 
 
-/*
 
-Input, börjar analysera uppgiften där.
-
-1: En textsträng för antal noder i grafen
-
-Noderna skall ha benämning 0, 1, 2, 3 osv sedan
-
-2: En textsträng med serie med talpar, exempel: 0 1, 2 3, 14 15
-
-0 1 är ett talpar
-1 2 är ett talpar
-2 3 är ett talpar
-3 4 är ett talpar
-
-14 15 är ett talpar
-kommatecknet separerar
-
-Max 262144st talpar = kanter. En vanlig int hanterar mycket högre värde än så, så det spelar ingen roll.
-
-Textsträngen kan vara tom = inga kanter
-
-3: En textsträng med två heltal, som är mindre än antalet noder från första strängen (eftersom första noden är 0).
-
-Talen är skilda med mellanslag
-Exempel 0 4
-
-Programmet skall hitta kortaste vägen mellan i detta fall 0 och 4. Med indataexemplet ovan så blir vägen 0-1-2-3-4.
-
-Programmet skall dock skriva ut detta som 0, 2, 3, 4
-
-
-
-
-*/
