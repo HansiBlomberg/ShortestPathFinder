@@ -22,10 +22,10 @@ namespace NodeTransportationLimited.Graphs.Tests
         public void isNumberOfNodesValidTest()
         {
 
-            Assert.IsTrue(InputHelper.isNumberOfNodesValid(10));
-            Assert.IsFalse(InputHelper.isNumberOfNodesValid(0));
-            Assert.IsFalse(InputHelper.isNumberOfNodesValid(-1));
-            Assert.IsFalse(InputHelper.isNumberOfNodesValid(513));
+            Assert.IsTrue(InputHelper.IsNumberOfNodesValid(10));
+            Assert.IsFalse(InputHelper.IsNumberOfNodesValid(0));
+            Assert.IsFalse(InputHelper.IsNumberOfNodesValid(-1));
+            Assert.IsFalse(InputHelper.IsNumberOfNodesValid(513));
         }
 
         /// <summary>
@@ -35,8 +35,8 @@ namespace NodeTransportationLimited.Graphs.Tests
         public void parseValuePairsTest()
         {
 
-            Assert.IsTrue(InputHelper.parseValuePairs("").Count() == 0, "Empty string test failed!");
-            Assert.IsTrue(InputHelper.parseValuePairs("0 1, 1 2, 2 3, 3 4").Count() == 5, "Count nodes = 5 failed!");
+            Assert.IsTrue(InputHelper.ParseValuePairs("").Count() == 0, "Empty string test failed!");
+            Assert.IsTrue(InputHelper.ParseValuePairs("0 1, 1 2, 2 3, 3 4").Count() == 5, "Count nodes = 5 failed!");
             // Assert.IsTrue(InputHelper.parseValuePairs("0 1, 1 2, 2 3, 3 4").Where(vp => vp.NeighborIDs.Contains(1)).Count() == 2, "Find 2 occurences of 1 as neighbour failedS!");
 
 
@@ -56,8 +56,8 @@ namespace NodeTransportationLimited.Graphs.Tests
         public void parseBeginAndEndNodesTest()
         {
             int start, end;
-            Assert.IsFalse(InputHelper.parseBeginAndEndNodes("x y", out start, out end), "x y not numbers test failed");
-            Assert.IsTrue(InputHelper.parseBeginAndEndNodes("10 20", out start, out end), "start 10 end 20 test failed at step 1");
+            Assert.IsFalse(InputHelper.ParseBeginAndEndNodes("x y", out start, out end), "x y not numbers test failed");
+            Assert.IsTrue(InputHelper.ParseBeginAndEndNodes("10 20", out start, out end), "start 10 end 20 test failed at step 1");
 
             Assert.IsTrue(start == 10, "start 10 end 20 test failed at step 2");
             Assert.IsTrue(end == 20, "start 10 end 20 test failed at step 3");
@@ -72,10 +72,10 @@ namespace NodeTransportationLimited.Graphs.Tests
         [TestMethod()]
         public void isStartAndEndNodesValidTest()
         {
-            var nodes = InputHelper.parseValuePairs("0 1, 1 2, 2 3, 3 4");
+            var nodes = InputHelper.ParseValuePairs("0 1, 1 2, 2 3, 3 4");
 
-            Assert.IsTrue(InputHelper.isStartAndEndNodesValid(5, 1, 3));
-            Assert.IsFalse(InputHelper.isStartAndEndNodesValid(5, 1, 5));
+            Assert.IsTrue(InputHelper.IsStartAndEndNodesValid(5, 1, 3));
+            Assert.IsFalse(InputHelper.IsStartAndEndNodesValid(5, 1, 5));
         }
 
         /// <summary>
@@ -84,7 +84,7 @@ namespace NodeTransportationLimited.Graphs.Tests
         [TestMethod()]
         public void StringifyNodesTest()
         {
-            var nodes = InputHelper.parseValuePairs("0 0, 0 1, 1 2");
+            var nodes = InputHelper.ParseValuePairs("0 0, 0 1, 1 2");
             var nodesAsString = InputHelper.StringifyNodes(nodes);
             Assert.IsTrue(nodesAsString == "0, 1, 2");
         }
