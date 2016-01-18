@@ -112,8 +112,8 @@ namespace NodeTransportationLimited.Graphs
 
         private Node NodeWithShortestDistance(List<Node> nodes)
         {
-            Node smallestDistanceNode = nodes.First();
-            if (smallestDistanceNode == null) return null;
+            Node smallestDistanceNode = nodes.FirstOrDefault();
+            if (smallestDistanceNode == null) throw new ArgumentOutOfRangeException("List<Node> nodes", "Please dont call me with an empty list!");
             foreach (var node in nodes.Where(n => n.Distance != null))
             {
                 if (node.Distance < smallestDistanceNode.Distance || smallestDistanceNode.Distance == null) smallestDistanceNode = node;
