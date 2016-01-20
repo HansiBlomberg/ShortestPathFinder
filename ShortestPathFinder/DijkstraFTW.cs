@@ -49,7 +49,7 @@ namespace NodeTransportationLimited.Graphs
             // This handles the case when there is no path from endNode towards startnode.
             if (endNode.PreviousID == null) return returnNodes;
 
-            // returnNodes skall ha alla noder inkl start och end om det finns noder mellan
+            // returnNodes need to have all nodes including start node and end node
             var nextNodeInPath = endNode;
             nodeStack.Push(nextNodeInPath);
 
