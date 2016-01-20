@@ -56,10 +56,8 @@ namespace NodeTransportationLimited.Graphs.ShortestPathFinder
             {
                 System.Console.WriteLine("Not a valid list of nodes, exiting...");
                 return;
-
             }
 
-      
             int startNode, endNode;
             string startEndStr = System.Console.ReadLine();
             if(!InputHelper.ParseBeginAndEndNodes(startEndStr, out startNode, out endNode))
@@ -87,9 +85,6 @@ namespace NodeTransportationLimited.Graphs.ShortestPathFinder
 
 			System.Console.WriteLine( output );
        
-           
-
-
 // Ni får *inte* göra några fler ändringar efter denna linje utanför denna
 // metods kropp.
 		}

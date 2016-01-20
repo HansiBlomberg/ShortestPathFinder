@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NodeTransportationLimited.Graphs
 {
@@ -12,7 +10,6 @@ namespace NodeTransportationLimited.Graphs
     /// </summary>
     public class DijkstraFTW
     {
-
         /// <summary>
         /// Returns a List of Node in order of the shortest path between begin and end inclusive
         /// </summary>
@@ -22,7 +19,6 @@ namespace NodeTransportationLimited.Graphs
         /// <returns></returns>
         public List<Node> GetShortestPathBetweenNodes(List<Node> nodes, int start, int end)
         {
-
             var returnNodes = new List<Node>();
 
             // Handle the case of start or end not existing in the nodes list
@@ -36,7 +32,6 @@ namespace NodeTransportationLimited.Graphs
                 return returnNodes;
             }
 
-
             var startNode = nodes.Where(n => n.ID == start).Single();
             var endNode = nodes.Where(n => n.ID == end).Single();
 
@@ -49,16 +44,15 @@ namespace NodeTransportationLimited.Graphs
 
             Dijkstra(nodes, startNode);
             var nodeStack = new Stack<Node>();
-
-
+            
             // Return an empty nodes list if there is no end.PreviousID
             // This handles the case when there is no path from endNode towards startnode.
             if (endNode.PreviousID == null) return returnNodes;
 
             // returnNodes skall ha alla noder inkl start och end om det finns noder mellan
-
             var nextNodeInPath = endNode;
             nodeStack.Push(nextNodeInPath);
+
             do
             {
                 nextNodeInPath = nodes.Where(n => n.ID == nextNodeInPath.PreviousID).Single();
@@ -69,11 +63,8 @@ namespace NodeTransportationLimited.Graphs
             foreach (var node in nodeStack) returnNodes.Add(node);
 
             return returnNodes;
-
         }
-
-
-
+        
         private void Dijkstra(List<Node> nodes, Node start)
         {
             var unoptimizedNodes = new List<Node>();
@@ -90,6 +81,7 @@ namespace NodeTransportationLimited.Graphs
             {
                 var node = NodeWithShortestDistance(unoptimizedNodes);
                 unoptimizedNodes.Remove(node);
+
                 foreach (var neighbour in node.Neighbours)
                 {
                     var neighbourNode = nodes.Where(n => n.ID == neighbour.ID).Single();
@@ -103,11 +95,8 @@ namespace NodeTransportationLimited.Graphs
                             neighbourNode.PreviousID = node.ID;
                         }
                     }
-
                 }
-
             }
-
         }
 
         private Node NodeWithShortestDistance(List<Node> nodes)
@@ -119,9 +108,7 @@ namespace NodeTransportationLimited.Graphs
                 if (node.Distance < smallestDistanceNode.Distance || smallestDistanceNode.Distance == null) smallestDistanceNode = node;
             }
             return smallestDistanceNode;
-
         }
-
     }
 }
 

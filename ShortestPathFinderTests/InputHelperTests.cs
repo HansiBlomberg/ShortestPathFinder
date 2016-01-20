@@ -21,33 +21,25 @@ namespace NodeTransportationLimited.Graphs.Tests
         [TestMethod()]
         public void isNumberOfNodesValidTest()
         {
-
             Assert.IsTrue(InputHelper.IsNumberOfNodesValid(10));
             Assert.IsFalse(InputHelper.IsNumberOfNodesValid(0));
             Assert.IsFalse(InputHelper.IsNumberOfNodesValid(-1));
             Assert.IsFalse(InputHelper.IsNumberOfNodesValid(513));
         }
-
         /// <summary>
         /// Tests the parseValuePairs method
         /// </summary>
         [TestMethod()]
         public void parseValuePairsTest()
         {
-
             Assert.IsTrue(InputHelper.ParseValuePairs("").Count() == 0, "Empty string test failed!");
             Assert.IsTrue(InputHelper.ParseValuePairs("0 1, 1 2, 2 3, 3 4").Count() == 5, "Count nodes = 5 failed!");
             // Assert.IsTrue(InputHelper.parseValuePairs("0 1, 1 2, 2 3, 3 4").Where(vp => vp.NeighborIDs.Contains(1)).Count() == 2, "Find 2 occurences of 1 as neighbour failedS!");
-
 
             //Assert.IsTrue( InputHelper.parseValuePairs("0 1, 1 2, 2 3, 3 4").Where(node => node.Neighbours)
             //                                                               .Where(neighbour=>neighbour.ID == 1)
             //                                                               .Count() == 2
             //              , "Find 2 occurences of 1 as neighbour failed!");
-
-
-
-
         }
         /// <summary>
         /// Tests the parseBeginAndEndNodesTest
@@ -61,11 +53,7 @@ namespace NodeTransportationLimited.Graphs.Tests
 
             Assert.IsTrue(start == 10, "start 10 end 20 test failed at step 2");
             Assert.IsTrue(end == 20, "start 10 end 20 test failed at step 3");
-
-
-
         }
-
         /// <summary>
         /// Tests the isStartAndEndNodesValid method
         /// </summary>
@@ -77,7 +65,6 @@ namespace NodeTransportationLimited.Graphs.Tests
             Assert.IsTrue(InputHelper.IsStartAndEndNodesValid(5, 1, 3));
             Assert.IsFalse(InputHelper.IsStartAndEndNodesValid(5, 1, 5));
         }
-
         /// <summary>
         /// Tests the StringifyNodes method
         /// </summary>
